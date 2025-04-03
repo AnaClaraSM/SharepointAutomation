@@ -19,4 +19,5 @@ for link in links:
     pyautogui.click()
     time.sleep(5)
     print(f"Link '{link}' adicionado com sucesso!")
+    # links.remove(link)
 print(f"{len(links)} links adicionados!")
