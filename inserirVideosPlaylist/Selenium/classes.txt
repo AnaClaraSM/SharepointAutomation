@@ -1,0 +1,4 @@
+link-container: "class name", "ax_g_6bae85a6"
+link-field: "class name", "field-481"
+edit-properties-btn: "class name", "iconButton ___deyl1t0"
+toggle-link-view-btn: "class name", "fui-Switch__input" (there are two)
