@@ -1,0 +1,16 @@
+from selenium import webdriver # Importa o módulo WebDriver do Selenium para acesso ao navegador
+import time # Biblioteca de tempo
+
+# Cria uma instância do WebDriver Chrome (navegador) e abre 
+navegador = webdriver.Chrome()
+
+# Maximiza a tela
+navegador.maximize_window()
+
+# Navega até o link da página da playlist
+navegador.get("https://www.youtube.com/playlist?list=PLHz_AreHm4dmSj0MHol_aoNYCSGFqvfXV")
+
+# playlistVideo = navegador.find_element()
+
+# Aguarda 10s
+time.sleep(10)
