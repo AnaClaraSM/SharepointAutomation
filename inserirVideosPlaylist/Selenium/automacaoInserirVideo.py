@@ -16,12 +16,8 @@ driver.get(yt_playlist_url)
 # Busca todos os vídeos da playlist pelo seu seletor css e armazena em uma lista
 videos = driver.find_elements(By.CSS_SELECTOR, "a.yt-simple-endpoint.style-scope.ytd-playlist-video-renderer")
 
-# Extrai os links (href) de cada vídeo e armazena em lista
-playlist = [] # cria lista vazia
-# Para cada vídeo
-for video in videos:
-    playlist.append(video.get_attribute("href")) # adiciona o link do vídeo na lista
-findVideosTest(playlist, 17)
+# Extrai os links (href) de cada vídeo e armazena em uma lista (list comprehension)
+playlist = [video.get_attribute("href") for video in videos] 
 
 # video.click()
 
