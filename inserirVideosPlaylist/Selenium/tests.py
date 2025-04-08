@@ -1,6 +1,6 @@
 # Verifica se foram encontrados todos os vídeos da playlist (obtidos com find_elements e armazenados em lista)
 
-def checkVideosInPlaylist (videos_encontrados, total_videos_playlist):
+def findVideosTest (videos_encontrados, total_videos_playlist):
     counter = 0 # contador para os elementos da lista
     # Para cada vídeo da lista encontrada
     for video in videos_encontrados:

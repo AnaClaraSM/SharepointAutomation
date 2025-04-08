@@ -4,7 +4,7 @@
 # YOUTUBE
 
 # Link da Playlist de Vídeos
-yt_playlist_url = "https://www.youtube.com/watch?v=8mei6uVttho&list=PLHz_AreHm4dmSj0MHol_aoNYCSGFqvfXV&index=1&pp=iAQB"
+yt_playlist_url = "https://www.youtube.com/playlist?list=PLHz_AreHm4dmSj0MHol_aoNYCSGFqvfXV"
 
 # Seletor de Vídeo Individual da Playlist (Tag a)
 yt_playlist_video_selector = "a.yt-simple-endpoint.style-scope.ytd-playlist-video-renderer"
