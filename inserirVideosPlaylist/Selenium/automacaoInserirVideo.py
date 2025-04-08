@@ -17,17 +17,6 @@ video = navegador.find_element("css selector", "a.yt-simple-endpoint.style-scope
 # Busca todos os vídeos da playlist pelo seu seletor css
 videos = navegador.find_elements("css selector", "a.yt-simple-endpoint.style-scope.ytd-playlist-video-renderer")
 
-# Teste - Verifica se encontrou todos os vídeos da playlist
-total_videos = 17
-counter = 0
-for video in videos:
-    counter += 1
-    print(f"Video {counter}: {video}")
-    print(f"FORAM ENCONTRADOS {counter} VÍDEOS.")
-    if counter == total_videos:
-        print("TODOS OS VÍDEOS FORAM ENCONTRADOS COM SUCESSO!")
-
-    
 
 # # Clica no vídeo
 # video.click()
