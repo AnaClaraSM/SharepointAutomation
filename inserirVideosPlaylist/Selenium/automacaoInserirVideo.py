@@ -60,7 +60,7 @@ playlist = [video.get_attribute("href") for video in videos]
 driver.get(sp_page_edit_url)
 
 # Aguarda o carregamento da página e do modo de edição
-time.sleep(10) # 10s
+time.sleep(5) # 5s
 
 # Buscar botões da página
 
