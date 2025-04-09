@@ -2,7 +2,7 @@ from selenium import webdriver # Importa o WebDriver para acesso ao navegador
 from selenium.webdriver.common.by import By
 import time # Biblioteca de tempo
 from variables import * # Importa variáveis de urls e elementos para a automação
-from tests import *
+from tests import * # Importa testes
 
 # Cria uma instância do Navegador (WebDriver Chrome) e inicializa
 driver = webdriver.Chrome()
@@ -10,9 +10,10 @@ driver = webdriver.Chrome()
 # Maximiza a tela do navegador
 driver.maximize_window()
 
+# Acessa o office
 driver.get("https://www.office.com/")
 
-time.sleep(1000)
+time.sleep(60) # Aguarda 1 minuto para que o usuário faça login
 
 # Navega até o link da playlist
 driver.get(yt_playlist_url)
