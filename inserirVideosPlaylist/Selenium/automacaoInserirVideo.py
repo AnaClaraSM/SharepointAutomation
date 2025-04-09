@@ -13,7 +13,7 @@ driver.maximize_window()
 # Acessa o office
 driver.get("https://www.office.com/")
 
-time.sleep(60) # Aguarda 1 minuto para que o usuário faça login
+time.sleep(120) # Aguarda 2 minutos para que o usuário faça login
 
 # Navega até o link da playlist
 driver.get(yt_playlist_url)
