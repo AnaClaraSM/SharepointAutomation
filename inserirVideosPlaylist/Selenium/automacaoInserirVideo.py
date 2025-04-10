@@ -83,6 +83,9 @@ for button in primary_buttons:
         # Armazena o botão
         update_page_button = button
 
+# TRATAR ERROS
+# Se total de botões Adicionar vídeo < total de vídeos OU se !update_page_button -> REALIZA A ROLAGEM, BUSCA E FILTRAGEM NOVAMENTE, com intervalo igual a intervalo+1; Por mais uma tentativa. Se erro. Fechar execução e retornar erro de webparts insuficientes.
+
 # Para cada botão de adicionar vídeo
 
 # Scroll até elemento estar visível
