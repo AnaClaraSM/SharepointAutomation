@@ -83,15 +83,6 @@ for button in primary_buttons:
         # Armazena o botão
         update_page_button = button
 
-# Validação
-print(f"Total de botões em primary_buttons: {len(primary_buttons)}")
-print(f"Total de botões 'Adicionar vídeo': {len(add_video_buttons)}")
-if update_page_button:
-    print(f"Botão 'Atualizar notícias' encontrado: {update_page_button['text']}")
-else:
-    print("Botão 'Atualizar notícias' não encontrado")
-
-
 # Para cada botão de adicionar vídeo
 
 # Scroll até elemento estar visível
