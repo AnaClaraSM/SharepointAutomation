@@ -23,8 +23,8 @@ sp_page_url = "https://governosp.sharepoint.com/sites/SEADE-Gecon2/SitePages/Log
 # Link da Página em Modo de Edição
 sp_page_edit_url = "https://governosp.sharepoint.com/sites/SEADE-Gecon2/SitePages/LogicaProgramacaoCursoEmVideo.aspx?Mode=Edit"
 
-# Seção rolável da página
-sp_scrollable_section = "document.querySelector('[data-automation-id=\"contentScrollRegion\"]')"
+# Seletor da seção rolável da página
+sp_scrollable_section_selector = "[data-automation-id=\"contentScrollRegion\"]"
 
 # Número de Colunas (Elementos por Linha) na Página
 sp_page_columns = 3
