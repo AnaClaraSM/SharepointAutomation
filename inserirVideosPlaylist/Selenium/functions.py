@@ -19,11 +19,8 @@ def scroll_page(driver, scrollable_section_selector, scroll_pause_time = 2):
     
     # Variáveis de rolagem
     screen_height = driver.execute_script("return arguments[0].clientHeight;", scrollable_element) # altura de tela (da seção rolável)
-    print(screen_height)
     scroll_height = driver.execute_script("return arguments[0].scrollHeight;", scrollable_element) # altura total da página/seção rolável (quanto a página pode ser rolada)
-    print(scroll_height)
     current_position = 0 # posição atual
-    print(current_position)
 
     # Loop
     while current_position < scroll_height:
@@ -31,5 +28,3 @@ def scroll_page(driver, scrollable_section_selector, scroll_pause_time = 2):
         time.sleep(scroll_pause_time) # aguarda o intervalo
         current_position += screen_height # atualiza a posição atual, somando a altura da tela
         scroll_height = driver.execute_script("return arguments[0].scrollHeight;", scrollable_element) # atualiza altura total (restante) da página
-        print(current_position)
-        print(scroll_height)
