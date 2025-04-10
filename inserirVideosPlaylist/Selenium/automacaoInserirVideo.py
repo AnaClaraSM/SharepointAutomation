@@ -65,7 +65,7 @@ time.sleep(5) # 5s
 # Buscar botões da página
 
 # Rola a página para garantir o carregamento de todos os botões
-scroll_page(driver, sp_scrollable_section, 2)
+scroll_page(driver, sp_scrollable_section, 2) # Função de rolagem
 
 add_video_buttons = [] # Cria lista para botões de adicionar vídeo
 
@@ -101,5 +101,5 @@ else:
 # Insere o link do vídeo correspondente no campo
 
 
-# Aguarda 10s
+# Aguarda 1s
 time.sleep(1)
