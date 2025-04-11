@@ -97,6 +97,9 @@ for button in primary_buttons:
 # Valida se o número de vídeos corresponde ao número de botões e se o botão de atualizar foi encontrado
 if (len(url_playlist) != len(add_video_buttons)) or (not update_page_button):
     print("\033[91mERRO: Número de vídeos não corresponde ao número de botões ou botão de atualizar não encontrado.\033[0m")
+    print(len(url_playlist))
+    print(len(add_video_buttons))
+    print(update_page_button)
     driver.close()
     exit()
     
