@@ -29,11 +29,14 @@ sp_scrollable_section_selector = "[data-automation-id=\"contentScrollRegion\"]"
 # Número de Colunas (Elementos por Linha) na Página
 sp_page_columns = 3
 
-# Classe do campo de inserção de link do Youtube (div)
-sp_video_url_field_class = "fieldGroup-373"
+# # Classe do campo de inserção de link do Youtube (div)
+# sp_video_url_field_class = "fieldGroup-373"
+
+# Seletor do campo de inserção de link do Youtube (div)
+sp_video_url_field_selector = "textarea[placeholder*='https://www.youtube.com']"
 
 # Classe dos botões de adicionar vídeo e atualizar notícias
 sp_primary_button_class = "ms-Button--primary"
 
 # Seletor da thumbnail de vídeo do youtube adicionado
-sp_video_thumbnail = "iframe[src*='youtube.com/embed']" # iframe com src contendo youtube...
+sp_video_thumbnail_selector = "iframe[src*='youtube.com/embed']" # iframe com src contendo youtube...

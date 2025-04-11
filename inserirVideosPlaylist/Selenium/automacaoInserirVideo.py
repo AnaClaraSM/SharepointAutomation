@@ -1,5 +1,6 @@
 from selenium import webdriver # Importa o WebDriver para acesso ao navegador
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait # Importa o WebDriverWait para esperas dinâmicas
 from selenium.webdriver.support import expected_conditions as EC
 import time # Biblioteca de tempo
@@ -48,7 +49,6 @@ videos = driver.find_elements(By.CSS_SELECTOR, yt_playlist_video_selector)
 
 # Extrai os links (href) de cada vídeo e armazena em uma lista (list comprehension)
 href_playlist = [video.get_attribute("href") for video in videos]
-print(f"HREFs: {href_playlist}")
 
 # Corrige os links da playlist, se necessário 
 url_playlist = [] #lista para urls completas 
@@ -60,7 +60,6 @@ for video_href in href_playlist:
     else:
         url_playlist.append(video_href) # apenas adiciona o link
     # OBS.: Verificar possibilidade de outros casos
-print(f"URLs: {url_playlist}")
 
 
 # 4. SHAREPOINT
@@ -94,34 +93,46 @@ for button in primary_buttons:
         # Armazena o botão
         update_page_button = button
 
-# TRATAR ERROS
+
+# Valida se o número de vídeos corresponde ao número de botões e se o botão de atualizar foi encontrado
+if (len(url_playlist) != len(add_video_buttons)) or (not update_page_button):
+    print("\033[91mERRO: Número de vídeos não corresponde ao número de botões ou botão de atualizar não encontrado.\033[0m")
+    driver.close()
+    exit()
+    
 # Se total de botões Adicionar vídeo < total de vídeos OU se !update_page_button -> REALIZA A ROLAGEM, BUSCA E FILTRAGEM NOVAMENTE, com intervalo igual a intervalo+1 (demora mais para rolar); Por mais uma tentativa (tentativa = 1; tentativa <= 2; tentativa +=1;). Se erro. Fechar execução e retornar erro de webparts insuficientes.
 
 # Para cada botão de adicionar vídeo (enumerando os índices)
 for index, add_button in enumerate(add_video_buttons):
     # Rola até que o botão esteja visível
-    driver.execute_script("arguments[0].scrollIntoView()", add_button)
+    driver.execute_script("arguments[0].scrollIntoView();", add_button)
     # Aguarda a visibilidade do botão ou até 10s
     WebDriverWait(driver, 10).until(EC.visibility_of(add_button))
-    # Clica no botão de adicionar vídeo
+    # Clica no botão de adicionar vídeo (utiliza JS para contornar a sobreposição de divs ao botão)
     # Se for o primeiro botão, clica duas vezes
     if index == 0:
-        add_button.click()
+        driver.execute_script("arguments[0].click();", add_button)
         time.sleep(2) # Aguarda 2s
-        add_button.click()
-    # Para os próximo, clica apenas uma vez
+        driver.execute_script("arguments[0].click();", add_button)
+    # Para os próximos, clica apenas uma vez
     else:
-        add_button.click()
-    # Busca o campo de inserção de link pela classe
-    url_field = driver.find_element(By.CLASS_NAME, sp_video_url_field_class)
+        driver.execute_script("arguments[0].click();", add_button)
+    time.sleep(2) # Aguarda 2s a visbilidade do campo de link
+    # Busca o campo de inserção de link pelo seletor
+    url_field = driver.find_element(By.CSS_SELECTOR, sp_video_url_field_selector)
     # Digita o link correspondente ao índice do botão
     url_field.send_keys(url_playlist[index])
     # Aguarda até que a thumbnail fique visível ou até 3 minutos
-    WebDriverWait(driver, 180).until(EC.presence_of_element_located(By.CSS_SELECTOR, sp_video_thumbnail))
+    video_thumbnail = driver.find_element(By.CSS_SELECTOR, sp_video_thumbnail_selector)
+    WebDriverWait(driver, 180).until(EC.presence_of_element_located(video_thumbnail))
 
 # Atualiza a página
-driver.execute_script("arguments[0].scrollIntoView()", update_page_button)
-update_page_button.click()
+# Rola até botão de atualizar ficar visível
+driver.execute_script("arguments[0].scrollIntoView();", update_page_button)
+# Aguarda a visibilidade do botão ou até 10s
+WebDriverWait(driver, 10).until(EC.visibility_of(update_page_button))
+# Clica no botão
+driver.execute_script("arguments[0].click();", update_page_button)
 
-# Aguarda 1s
-time.sleep(1)
+# Aguarda 10s
+time.sleep(10)
