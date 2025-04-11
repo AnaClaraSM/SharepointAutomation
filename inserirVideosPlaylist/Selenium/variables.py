@@ -33,4 +33,7 @@ sp_page_columns = 3
 sp_video_url_field_class = "fieldGroup-373"
 
 # Classe dos botões de adicionar vídeo e atualizar notícias
-primary_button_class = "ms-Button--primary"
+sp_primary_button_class = "ms-Button--primary"
+
+# Seletor da thumbnail de vídeo do youtube adicionado
+sp_video_thumbnail = "iframe[src*='youtube.com/embed']" # iframe com src contendo youtube...

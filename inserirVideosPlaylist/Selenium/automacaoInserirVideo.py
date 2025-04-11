@@ -51,21 +51,16 @@ href_playlist = [video.get_attribute("href") for video in videos]
 print(f"HREFs: {href_playlist}")
 
 # Corrige os links da playlist, se necessário 
-url_playlist = [] #lista para armazenar urls completas 
-# OBS.: Poderia-se modificar a lista original ao invés de criar uma nova
+url_playlist = [] #lista para urls completas 
 for video_href in href_playlist:
     # Se o link não começa com https...com
     if not video_href.startswith("https://www.youtube.com"):
         url_playlist.append(f"https://www.youtube.com{video_href}") # completa o link e adiciona
-    # Se já começa com https...com
+    # Senão
     else:
         url_playlist.append(video_href) # apenas adiciona o link
     # OBS.: Verificar possibilidade de outros casos
 print(f"URLs: {url_playlist}")
-
-
-
-# OPCIONAL -> Salvar os links em um arquivo
 
 
 # 4. SHAREPOINT
@@ -86,7 +81,7 @@ scroll_page(driver, sp_scrollable_section_selector, 2) # Função de rolagem
 add_video_buttons = [] # Cria lista para botões de adicionar vídeo
 
 # Busca todos os botões primários (adicionar vídeo e atualizar página)
-primary_buttons = driver.find_elements(By.CLASS_NAME, primary_button_class)
+primary_buttons = driver.find_elements(By.CLASS_NAME, sp_primary_button_class)
 
 # Filtra os botões
 for button in primary_buttons:
@@ -121,7 +116,12 @@ for index, add_button in enumerate(add_video_buttons):
     url_field = driver.find_element(By.CLASS_NAME, sp_video_url_field_class)
     # Digita o link correspondente ao índice do botão
     url_field.send_keys(url_playlist[index])
+    # Aguarda até que a thumbnail fique visível ou até 3 minutos
+    WebDriverWait(driver, 180).until(EC.presence_of_element_located(By.CSS_SELECTOR, sp_video_thumbnail))
 
+# Atualiza a página
+driver.execute_script("arguments[0].scrollIntoView()", update_page_button)
+update_page_button.click()
 
 # Aguarda 1s
 time.sleep(1)
