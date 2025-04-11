@@ -47,7 +47,23 @@ driver.get(yt_playlist_url)
 videos = driver.find_elements(By.CSS_SELECTOR, yt_playlist_video_selector)
 
 # Extrai os links (href) de cada vídeo e armazena em uma lista (list comprehension)
-playlist = [video.get_attribute("href") for video in videos]
+href_playlist = [video.get_attribute("href") for video in videos]
+print(f"HREFs: {href_playlist}")
+
+# Corrige os links da playlist, se necessário 
+url_playlist = [] #lista para armazenar urls completas 
+# OBS.: Poderia-se modificar a lista original ao invés de criar uma nova
+for video_href in href_playlist:
+    # Se o link não começa com https...com
+    if not video_href.startswith("https://www.youtube.com"):
+        url_playlist.append(f"https://www.youtube.com{video_href}") # completa o link e adiciona
+    # Se já começa com https...com
+    else:
+        url_playlist.append(video_href) # apenas adiciona o link
+    # OBS.: Verificar possibilidade de outros casos
+print(f"URLs: {url_playlist}")
+
+
 
 # OPCIONAL -> Salvar os links em um arquivo
 
@@ -84,15 +100,27 @@ for button in primary_buttons:
         update_page_button = button
 
 # TRATAR ERROS
-# Se total de botões Adicionar vídeo < total de vídeos OU se !update_page_button -> REALIZA A ROLAGEM, BUSCA E FILTRAGEM NOVAMENTE, com intervalo igual a intervalo+1; Por mais uma tentativa. Se erro. Fechar execução e retornar erro de webparts insuficientes.
+# Se total de botões Adicionar vídeo < total de vídeos OU se !update_page_button -> REALIZA A ROLAGEM, BUSCA E FILTRAGEM NOVAMENTE, com intervalo igual a intervalo+1 (demora mais para rolar); Por mais uma tentativa (tentativa = 1; tentativa <= 2; tentativa +=1;). Se erro. Fechar execução e retornar erro de webparts insuficientes.
 
-# Para cada botão de adicionar vídeo
-
-# Scroll até elemento estar visível
-
-# Clica no botão
-
-# Insere o link do vídeo correspondente no campo
+# Para cada botão de adicionar vídeo (enumerando os índices)
+for index, add_button in enumerate(add_video_buttons):
+    # Rola até que o botão esteja visível
+    driver.execute_script("arguments[0].scrollIntoView()", add_button)
+    # Aguarda a visibilidade do botão ou até 10s
+    WebDriverWait(driver, 10).until(EC.visibility_of(add_button))
+    # Clica no botão de adicionar vídeo
+    # Se for o primeiro botão, clica duas vezes
+    if index == 0:
+        add_button.click()
+        time.sleep(2) # Aguarda 2s
+        add_button.click()
+    # Para os próximo, clica apenas uma vez
+    else:
+        add_button.click()
+    # Busca o campo de inserção de link pela classe
+    url_field = driver.find_element(By.CLASS_NAME, sp_video_url_field_class)
+    # Digita o link correspondente ao índice do botão
+    url_field.send_keys(url_playlist[index])
 
 
 # Aguarda 1s

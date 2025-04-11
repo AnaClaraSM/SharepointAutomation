@@ -28,3 +28,5 @@ def scroll_page(driver, scrollable_section_selector, scroll_pause_time = 2):
         time.sleep(scroll_pause_time) # aguarda o intervalo
         current_position += screen_height # atualiza a posição atual, somando a altura da tela
         scroll_height = driver.execute_script("return arguments[0].scrollHeight;", scrollable_element) # atualiza altura total (restante) da página
+    # Aguarda mais 2s após terminar
+    time.sleep(scroll_pause_time)
