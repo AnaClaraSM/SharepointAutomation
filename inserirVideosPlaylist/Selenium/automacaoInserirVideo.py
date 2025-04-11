@@ -119,12 +119,13 @@ for index, add_button in enumerate(add_video_buttons):
         driver.execute_script("arguments[0].click();", add_button)
     time.sleep(2) # Aguarda 2s a visbilidade do campo de link
     # Busca o campo de inserção de link pelo seletor
+    url_field = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, sp_video_url_field_selector)))
     url_field = driver.find_element(By.CSS_SELECTOR, sp_video_url_field_selector)
     # Digita o link correspondente ao índice do botão
     url_field.send_keys(url_playlist[index])
     # Aguarda até que a thumbnail fique visível ou até 3 minutos
-    video_thumbnail = driver.find_element(By.CSS_SELECTOR, sp_video_thumbnail_selector)
-    WebDriverWait(driver, 180).until(EC.presence_of_element_located(video_thumbnail))
+    WebDriverWait(driver, 180).until(EC.presence_of_element_located((By.CSS_SELECTOR, sp_video_thumbnail_selector)))
+    time.sleep(5) # espera mais 5 segundos para carregar completamente
 
 # Atualiza a página
 # Rola até botão de atualizar ficar visível
